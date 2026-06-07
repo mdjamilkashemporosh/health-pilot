@@ -1,63 +1,117 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { BsLayoutSidebarInset } from "react-icons/bs";
+import DashboardOverview from "./components/dashboard/overview";
+import { allTasks } from "./data/task";
+import { sidebarData } from "./components/sidebar";
+import { useSidebarStore } from "./store/sidebar-store";
+import { useTaskStore } from "./store/task-store";
 
 export default function Home() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const checkedTasks = useTaskStore((state) => state.checkedTasks);
+  const toggleTask = useTaskStore((state) => state.toggleTask);
+  const activeId = useSidebarStore((state) => state.activeId);
+  const filteredTasks =
+    activeId === "all"
+      ? allTasks
+      : allTasks.filter((task) => task.category === activeId);
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+    <div className="min-h-screen flex">
+      <aside className="hidden  p-4 lg:block w-80 ">
+        <DashboardOverview />
+      </aside>
+
+      {isSidebarOpen && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+
+          <aside className="fixed left-0 top-0 h-full w-80  p-4  z-50 lg:hidden bg-white">
+            <DashboardOverview />
+          </aside>
+        </>
+      )}
+
+      <main className="flex-1">
+        <header className="flex items-center  p-4 lg:hidden">
+          <button onClick={() => setIsSidebarOpen(true)}>
+            <BsLayoutSidebarInset className="text-gray-700" size={24} />
+          </button>
+        </header>
+
+        <div
+          className="
+          max-h-screen overflow-scroll
+           scrollbar-hide"
+        >
+          {filteredTasks.map((task) => {
+            const categoryLabel = sidebarData.find(
+              (item) => item.id === task.category,
+            )?.label;
+
+            const isChecked = checkedTasks.includes(task.id);
+
+            return (
+              <div
+                key={task.id}
+                className="group p-5 m-4 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all"
+              >
+                {/* TOP ROW */}
+                <div className="flex items-start justify-between">
+                  <span className="inline-block text-[11px] font-semibold tracking-widest text-lime-700 bg-lime-50 px-2 py-1 rounded-md">
+                    {categoryLabel}
+                  </span>
+
+                  {/* CLICKABLE CHECKBOX */}
+                  <button
+                    onClick={() => toggleTask(task.id)}
+                    className={`w-5 h-5 rounded border flex items-center justify-center transition
+                      ${
+                        isChecked
+                          ? "bg-lime-500 border-lime-500 text-white"
+                          : "border-gray-300"
+                      }
+                    `}
+                  >
+                    {isChecked && "✓"}
+                  </button>
+                </div>
+
+                {/* TITLE */}
+                <h3
+                  className={`font-semibold mt-2 transition
+                    ${
+                      isChecked
+                        ? "line-through text-gray-400"
+                        : "text-gray-900 group-hover:text-lime-700"
+                    }
+                  `}
+                >
+                  {task.title}
+                </h3>
+
+                {/* DESCRIPTION */}
+                <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+                  {task.description}
+                </p>
+
+                {/* FOOTER */}
+                <div className="flex items-center justify-between mt-4">
+                  <span className="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                    ⏱ {task.duration}
+                  </span>
+
+                  <span className="text-xs text-gray-400 capitalize">
+                    {task.difficulty}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </main>
     </div>
