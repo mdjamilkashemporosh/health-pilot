@@ -91,7 +91,14 @@ export default function DashboardOverview() {
         })}
       </div>
       <p className="text-[11px] text-gray-400 mt-2">
-        Progress is saved locally and resets daily.
+        <a
+          href="https://github.com/mdjamilkashemporosh/health-pilot"
+          target="_blank"
+          rel="noreferrer"
+          className="text-blue-400 hover:underline"
+        >
+          ⭐ Star us on GitHub
+        </a>
       </p>
     </section>
   );
