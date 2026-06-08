@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/5d626170-3796-46d4-8740-2694ed7e6723" width="150" />
+</div>
 
-## Getting Started
+Health Pilot is a daily health, fitness, productivity, and lifestyle optimization system built to help you stay consistent with powerful habits across body, mind, nutrition, hormones, and recovery.
 
-First, run the development server:
+It is designed as a **structured life operating system**, combining science-backed habits into a single actionable daily routine.
+
+##  Features
+
+- **Body & Training System**
+  - Strength training routines
+  - Mobility & injury prevention
+  - Cardio and step tracking
+  - Post-workout recovery
+
+- **Mind & Focus System**
+  - Meditation & mindfulness
+  - Deep work sessions
+  - Journaling & reflection
+  - Digital detox routines
+
+- **Hormonal Optimization**
+  - Sleep & circadian rhythm support
+  - Sunlight exposure tracking
+  - Stress control habits
+  - Nutrition-based hormone support
+
+- **Nutrition System**
+  - High-protein meal focus
+  - Hydration tracking
+  - Gut health improvement
+  - Anti-inflammatory food habits
+
+- **Recovery System**
+  - Sleep optimization routines
+  - HRV-based recovery awareness
+  - Sauna, breathwork, and rest days
+  - Strategic napping
+
+## Core Concept
+
+Health Pilot is built on one principle:
+
+> **Small daily actions > occasional extreme effort**
+
+Instead of overwhelming fitness plans, it focuses on:
+- Consistency
+- Sustainability
+- Compound improvement over time
+
+
+## Installation locally
 
 ```bash
+git clone https://github.com/mdjamilkashemporosh/health-pilot
+cd health-pilot
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Issues
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+If you find any bugs, glitches, or unexpected behavior, feel free to report them.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### How to report
+- Go to the [Issues tab](../../issues)
+- Click **New issue**
+- Provide a clear title and description
+- Add screenshots if possible
 
-## Learn More
+### Before reporting
+Please make sure:
+- The issue is not already reported
+- You are using the latest version of the project
 
-To learn more about Next.js, take a look at the following resources:
+  
+## Contributing
+ 
+Contributions are welcome. If you have a habit that is well-researched and fits one of the 5 pillars, feel free to open a pull request.
+ 
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feat/add-habit`)
+3. Commit your changes (`git commit -m 'feat: add breathwork habit'`)
+4. Push to the branch (`git push origin feat/add-habit`)
+5. Open a Pull Request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
+ 
+MIT © [mdjamilkashemporosh](https://github.com/mdjamilkashemporosh)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Sponsors
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Special thanks to the supporters of this project:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Fonkalabs** — Product & engineering support  
+
+> Want to support this project? Sponsor or reach out via GitHub.
